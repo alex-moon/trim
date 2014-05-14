@@ -1,1 +1,1 @@
-<Context path="/wick" docBase="/opt/wick/wick.war" debug="2" privileged="true" allowLinking="true" crossContext="true" />
+<Context path="/wick" docBase="/home/moona/work/wick/target/Wick-0.6.9.war" debug="2" privileged="true" allowLinking="true" crossContext="true" />
