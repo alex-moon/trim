@@ -14,16 +14,17 @@ import com.sun.jersey.spi.resource.Singleton;
 @Singleton
 public class Wick {
 	private Controller controller;
+	
+	public Wick() {
+    	controller = new Controller();
+    	controller.start();
+    	System.out.println("Term Controller is not started! Starting...");
+	}
 
     @GET
     @Path("/{term}")
     @Produces(MediaType.APPLICATION_JSON)
     public Term term(@PathParam("term") String term) {
-        if (controller == null) {
-        	controller = new Controller();
-        	controller.start();
-        	System.out.println("Term Controller is not started! Starting...");
-        }
         return controller.getTerm(term);
     }
 }
