@@ -1,16 +1,26 @@
 package com.github.alex_moon.wick.term;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 public class Controller extends Thread {
 	private Map<String, Term> terms;
-	private List<String> termStrings = Arrays.asList("limpid", "sod", "grandiloquent", "indubitable", "discretion");
-	private Random random = new Random();
+	private List<String> termStrings;
+	private Random random;
 	
 	private Term term;
+	
+	public Controller() {
+		random = new Random();
+		termStrings = Arrays.asList("limpid", "sod", "grandiloquent", "hetorodoxia", "fulgurant");
+		terms = new HashMap<String, Term>();
+		for (String termString : termStrings) {
+			terms.put(termString, new Term(termString));
+		}
+	}
 
 	public void run() {
 		// for our purposes all we want is to generate a bunch of random term values
@@ -19,16 +29,19 @@ public class Controller extends Thread {
 			term = getTerm(termString);
 			Double score = random.nextDouble();
 			term.update(score);
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				break;
+			}
 		}
 	}
 	
 	public Term getTerm(String termString) {
 		if (!terms.containsKey(termString)) {
-			term = new Term(termString);
-			terms.put(termString, term);
+			return null;
 		} else {
-			term = terms.get(termString);
+			return terms.get(termString);
 		}
-		return term;
 	}
 }

@@ -8,8 +8,10 @@ import javax.ws.rs.core.MediaType;
 
 import com.github.alex_moon.wick.term.Controller;
 import com.github.alex_moon.wick.term.Term;
+import com.sun.jersey.spi.resource.Singleton;
 
 @Path("/term")
+@Singleton
 public class Wick {
 	private Controller controller;
 
@@ -19,8 +21,8 @@ public class Wick {
     public Term term(@PathParam("term") String term) {
         if (controller == null) {
         	controller = new Controller();
-        	controller.run();
-        	System.out.println("Term Controller was not started! Starting...");
+        	controller.start();
+        	System.out.println("Term Controller is not started! Starting...");
         }
         return controller.getTerm(term);
     }
