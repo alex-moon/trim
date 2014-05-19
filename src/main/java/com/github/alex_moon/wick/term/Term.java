@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.codehaus.jackson.annotate.JsonValue;
+import org.json.simple.JSONObject;
 
 public class Term {
 	private String termString;
@@ -29,4 +30,15 @@ public class Term {
 	public String getTerm() {
 		return termString;
 	}
+	
+    public JSONObject toJson() {
+        // returns a JSON string for means and standard deviations
+        JSONObject result = new JSONObject();
+        
+        result.put("term", termString);
+        result.put("mean", mean);
+        result.put("standard_deviation", standardDeviation);
+        
+        return result;
+    }
 }
