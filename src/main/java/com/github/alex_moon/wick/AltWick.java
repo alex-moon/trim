@@ -43,7 +43,7 @@ public class AltWick extends HttpServlet {
 			termString = (String) jsonObject.get("term");
 			score = (Double) jsonObject.get("score");
 		} else {
-			termString = url_path.get(url_path.size()-1);
+			termString = url_path.get(url_path.size()-2);
 			score = Double.parseDouble(lastToken);
 		}
 
