@@ -34,7 +34,7 @@ public class Wick {
 		// @todo use POST body data for something
 		return controller.putTerm(term, score);
 	}
-	
+
 	@POST
 	@Path("/json")
 	@Produces(MediaType.APPLICATION_JSON)
