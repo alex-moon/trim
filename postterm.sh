@@ -1,4 +1,4 @@
 #!/bin/sh
 clear;
-curl -d "http://localhost:8080/wick/term/pusillanimous/0.9/"
+curl -d '{"success":"success"}'  "http://localhost:8080/wick/$1/term/$2/$3/"
 printf "\nDone\n"

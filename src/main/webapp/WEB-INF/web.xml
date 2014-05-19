@@ -1,5 +1,15 @@
 <web-app version="2.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/j2ee" xsi:schemalocation="http:/java.sun.com/dtd/web-app_2_3.dtd">
-  <servlet>
+	<servlet>
+	  <servlet-name>AltWick</servlet-name>
+	  <servlet-class>com.github.alex_moon.wick.AltWick</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+	    <servlet-name>AltWick</servlet-name>
+	    <url-pattern>/v1/*</url-pattern>
+	</servlet-mapping>
+
+    <servlet>
     <servlet-name>Wick</servlet-name>
     <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
     <init-param>
@@ -14,6 +24,6 @@
 
   <servlet-mapping>
     <servlet-name>Wick</servlet-name>
-    <url-pattern>/*</url-pattern>
+    <url-pattern>/v2/*</url-pattern>
   </servlet-mapping>
 </web-app>
