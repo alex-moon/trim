@@ -26,16 +26,7 @@ public class Term {
 		return standardDeviation;
 	}
 	
-	public String toString() {
+	public String getTerm() {
 		return termString;
-	}
-	
-	@JsonValue
-	public Map<String, Object> serialise() {
-		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("term", termString);
-		result.put("mean", mean);
-		result.put("sd", standardDeviation);
-		return result;
 	}
 }

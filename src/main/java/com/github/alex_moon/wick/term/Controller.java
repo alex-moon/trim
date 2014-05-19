@@ -44,4 +44,16 @@ public class Controller extends Thread {
 			return terms.get(termString);
 		}
 	}
+
+	public Term putTerm(String termString, Double score) {
+		Term term;
+		if (!terms.containsKey(termString)) {
+			term = new Term(termString);
+			terms.put(termString, term);
+		} else {
+			term = terms.get(termString);
+		}
+		term.update(score);
+		return term;
+	}
 }
