@@ -25,6 +25,13 @@ public class Wick {
     	System.out.println("Term Controller is not started! Starting...");
 	}
 
+    @GET
+    @Path("/{term}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Term getTerm(@PathParam("term") String term) {
+        return controller.getTerm(term);
+    }
+
 	@POST
 	@Path("/{term}/{score}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -41,11 +48,4 @@ public class Wick {
 		Double score = (Double) termData.get("score");
 		return controller.putTerm(term, score);
 	}
-
-    @GET
-    @Path("/{term}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Term getTerm(@PathParam("term") String term) {
-        return controller.getTerm(term);
-    }
 }

@@ -27,6 +27,24 @@ public class AltWick extends HttpServlet {
 		}
 	}
 
+    public void doGet(HttpServletRequest req, HttpServletResponse res)
+                    throws IOException, ServletException {
+        PrintWriter out = res.getWriter();
+        String url = req.getRequestURL().toString();
+        List<String> url_path = Arrays.asList(url.split("/"));
+
+        String termString = url_path.get(url_path.size()-1);
+
+        Term term = controller.getTerm(termString);
+        res.setContentType("application/json");
+        if (term == null) {
+            res.sendError(HttpServletResponse.SC_NOT_FOUND, "Term " + termString + " not found");
+        } else {
+            out.println(JSONValue.toJSONString(term.toJson()));
+        }
+        out.close();
+    }
+
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
             throws IOException, ServletException {
 		PrintWriter out = res.getWriter();
@@ -51,22 +69,4 @@ public class AltWick extends HttpServlet {
 		out.println(JSONValue.toJSONString(term.toJson()));
 		out.close();
 	}
-
-    public void doGet(HttpServletRequest req, HttpServletResponse res)
-                    throws IOException, ServletException {
-        PrintWriter out = res.getWriter();
-        String url = req.getRequestURL().toString();
-        List<String> url_path = Arrays.asList(url.split("/"));
-
-        String termString = url_path.get(url_path.size()-1);
-
-        Term term = controller.getTerm(termString);
-        res.setContentType("application/json");
-        if (term == null) {
-            res.sendError(HttpServletResponse.SC_NOT_FOUND, "Term " + termString + " not found");
-        } else {
-            out.println(JSONValue.toJSONString(term.toJson()));
-        }
-        out.close();
-    }
 }
