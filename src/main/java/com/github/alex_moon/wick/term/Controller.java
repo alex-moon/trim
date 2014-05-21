@@ -30,7 +30,7 @@ public class Controller extends Thread {
 			Double score = random.nextDouble();
 			term.update(score);
 			try {
-				Thread.sleep(500);
+				Thread.sleep(200);
 			} catch (InterruptedException e) {
 				break;
 			}
