@@ -10,9 +10,9 @@ public class Controller extends Thread {
 	private Map<String, Term> terms;
 	private List<String> termStrings;
 	private Random random;
-	
+
 	private Term term;
-	
+
 	public Controller() {
 		random = new Random();
 		termStrings = Arrays.asList("limpid", "sod", "grandiloquent", "hetorodoxia", "fulgurant");
@@ -36,7 +36,7 @@ public class Controller extends Thread {
 			}
 		}
 	}
-	
+
 	public Term getTerm(String termString) {
 		if (!terms.containsKey(termString)) {
 			return null;

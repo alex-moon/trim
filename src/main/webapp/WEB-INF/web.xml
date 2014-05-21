@@ -1,31 +1,22 @@
-<web-app version="2.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/j2ee" xsi:schemalocation="http:/java.sun.com/dtd/web-app_2_3.dtd">
-	<!--  Wick v1 - using javax and json.simple -->
+<web-app version="2.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/j2ee" xsi:schemalocation="http:/java.sun.com/dtd/web-app_2_3.dtd">
+	<!-- Wick v2 - using jersey and jackson -->
 	<servlet>
-		<servlet-name>AltWick</servlet-name>
-		<servlet-class>com.github.alex_moon.wick.AltWick</servlet-class>
+		<servlet-name>Wick</servlet-name>
+		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer
+		</servlet-class>
+		<init-param>
+			<param-name>com.sun.jersey.config.property.packages</param-name>
+			<param-value>com.github.alex_moon.wick</param-value>
+		</init-param>
+		<init-param>
+			<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+			<param-value>true</param-value>
+		</init-param>
 	</servlet>
 
 	<servlet-mapping>
-	    <servlet-name>AltWick</servlet-name>
-	    <url-pattern>/v1/*</url-pattern>
-	</servlet-mapping>
-
-	<!--  Wick v2 - using jersey and jackson -->
-	<servlet>
 		<servlet-name>Wick</servlet-name>
-		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
-		<init-param>
-		    <param-name>com.sun.jersey.config.property.packages</param-name>
-		    <param-value>com.github.alex_moon.wick</param-value>
-		</init-param>
-		<init-param>
-		    <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
-		    <param-value>true</param-value>
-		</init-param>
-	</servlet>
-
-  <servlet-mapping>
-    <servlet-name>Wick</servlet-name>
-    <url-pattern>/v2/*</url-pattern>
-  </servlet-mapping>
+		<url-pattern>/v2/*</url-pattern>
+	</servlet-mapping>
 </web-app>

@@ -20,17 +20,17 @@ public class Wick {
 	private Controller controller;
 
 	public Wick() {
-    	controller = new Controller();
-    	controller.start();
-    	System.out.println("Term Controller is not started! Starting...");
+		controller = new Controller();
+		controller.start();
+		System.out.println("Term Controller is not started! Starting...");
 	}
 
-    @GET
-    @Path("/{term}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Term getTerm(@PathParam("term") String term) {
-        return controller.getTerm(term);
-    }
+	@GET
+	@Path("/{term}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Term getTerm(@PathParam("term") String term) {
+		return controller.getTerm(term);
+	}
 
 	@POST
 	@Path("/{term}/{score}")
