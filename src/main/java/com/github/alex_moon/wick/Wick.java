@@ -29,9 +29,6 @@ public class Wick {
 	@Path("/{term}/{score}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Term putTerm(@PathParam("term") String term, @PathParam("score") Double score) {
-		// we want to create a new term if it doesn't exist, then upgrade it with
-		// the given score - this should all be doable with existing Controller methods
-		// @todo use POST body data for something
 		return controller.putTerm(term, score);
 	}
 
