@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.github.alex_moon.trim.term.Controller;
 import com.github.alex_moon.trim.term.Term;
+import com.github.alex_moon.trim.text.Text;
 import com.sun.jersey.spi.resource.Singleton;
 
 @Path("/")
@@ -53,9 +54,13 @@ public class Endpoint {
 	@Path("/text/json")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Term putTextAsJson(Map<String, Object> termData) {
-		String term = (String) termData.get("term");
-		Double score = (Double) termData.get("score");
-		return controller.putTerm(term, score);
+	public Text putTextAsJson(Map<String, String> textData) {
+		String textString = textData.get("text");
+		if (textData.containsKey("uuid")) {
+	        String uuid = textData.get("uuid");
+	        return new Text(textString, uuid);
+		} else {
+		    return new Text(textString);
+		}
 	}
 }
