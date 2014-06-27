@@ -15,7 +15,7 @@ public class Text {
     public Text(String initialStringValue) {
         stringValue = initialStringValue;
         uuid = UUID.randomUUID();
-        proportions = new HashMap<String, Double>();
+        buildProportions();
     }
 
     public Text(String initialStringValue, String uuid) {
@@ -25,10 +25,10 @@ public class Text {
         } catch (IllegalArgumentException e) {
             this.uuid = UUID.randomUUID();
         }
-        proportions = new HashMap<String, Double>();
+        buildProportions();
     }
 
-    public void update() {
+    public void buildProportions() {
         Map<String, Integer> counts = new HashMap<String, Integer>();
         Integer total = 0;
 
@@ -70,11 +70,11 @@ public class Text {
         return stringValue;
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public String getUuid() {
+        return uuid.toString();
     }
 
-    public String getUuidAsString() {
-        return uuid.toString();
+    public Map<String, Double> getProportions() {
+        return proportions;
     }
 }

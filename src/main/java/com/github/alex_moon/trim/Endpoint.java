@@ -19,6 +19,7 @@ import com.sun.jersey.spi.resource.Singleton;
 @Singleton
 public class Endpoint {
 	private Controller controller;
+	private Text text;
 
 	public Endpoint() {
 		controller = new Controller();
@@ -58,9 +59,22 @@ public class Endpoint {
 		String textString = textData.get("text");
 		if (textData.containsKey("uuid")) {
 	        String uuid = textData.get("uuid");
-	        return new Text(textString, uuid);
+	        text = new Text(textString, uuid);
 		} else {
-		    return new Text(textString);
+		    text =  new Text(textString);
 		}
+
+		Map<String, Double> proportions = text.getProportions();
+        for (String termString : proportions.keySet()) {
+            Term term = controller.getTerm(termString);
+            Double proportion = proportions.get(termString);
+            if (term == null) {
+                term = controller.putTerm(termString, proportion);
+            } else {
+                term.update(proportion);
+            }
+        }
+        
+        return text;
 	}
 }
