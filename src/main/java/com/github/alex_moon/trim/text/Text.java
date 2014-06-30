@@ -10,7 +10,7 @@ public class Text {
     private String stringValue;
     private UUID uuid;
 
-    private Map<String, Double> proportions;
+    private Map<String, Double> proportions = new HashMap<String, Double>();
 
     public Text(String initialStringValue) {
         stringValue = initialStringValue;
