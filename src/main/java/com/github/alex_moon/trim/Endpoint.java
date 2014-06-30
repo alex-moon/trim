@@ -28,21 +28,21 @@ public class Endpoint {
 	}
 
 	@GET
-	@Path("/term/{term}")
+	@Path("term/{term}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Term getTerm(@PathParam("term") String term) {
 		return controller.getTerm(term);
 	}
 
 	@POST
-	@Path("/term/{term}/{score}")
+	@Path("term/{term}/{score}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Term putTerm(@PathParam("term") String term, @PathParam("score") Double score) {
 		return controller.putTerm(term, score);
 	}
 
 	@POST
-	@Path("/term/json")
+	@Path("term/json")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Term putTermAsJson(Map<String, Object> termData) {
@@ -52,7 +52,7 @@ public class Endpoint {
 	}
 
 	@POST
-	@Path("/text/json")
+	@Path("text/json")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Text putTextAsJson(Map<String, String> textData) {
