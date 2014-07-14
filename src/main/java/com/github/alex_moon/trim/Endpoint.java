@@ -68,6 +68,21 @@ public class Endpoint {
             }
         }
         
+        for (String termString : proportions.keySet()) {
+            Boolean doCorrelation = false;
+            for (String coString : proportions.keySet()) {
+                if (! coString.equals(termString)) {
+                    if (!doCorrelation) {
+                        continue;
+                    }
+                    Term term = Application.getTermController().getTerm(termString);
+                    Term coTerm = Application.getTermController().getTerm(coString);
+                    Application.getCorrelationController().updateCorrelation(term, coTerm);
+                }
+                doCorrelation = true;
+            }
+        }
+        
         return text;
 	}
 }

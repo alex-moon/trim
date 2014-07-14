@@ -36,6 +36,18 @@ public class Term {
 		return standardDeviation;
 	}
 
+    public Double getLastStandardDeviation() {
+        return lastStandardDeviation;
+    }
+
+    public Double getLastMean() {
+        return lastMean;
+    }
+    
+    public Double getLastScore() {
+        return lastScore;
+    }
+	
 	public String getTerm() {
 		return termString;
 	}
