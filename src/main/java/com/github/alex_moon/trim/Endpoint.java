@@ -18,27 +18,20 @@ import com.sun.jersey.spi.resource.Singleton;
 @Path("/")
 @Singleton
 public class Endpoint {
-	private Controller controller;
 	private Text text;
-
-	public Endpoint() {
-		controller = new Controller();
-		controller.start();
-		System.out.println("Term Controller is not started! Starting...");
-	}
 
 	@GET
 	@Path("term/{term}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Term getTerm(@PathParam("term") String term) {
-		return controller.getTerm(term);
+		return Application.getTermController().getTerm(term);
 	}
 
 	@POST
 	@Path("term/{term}/{score}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Term putTerm(@PathParam("term") String term, @PathParam("score") Double score) {
-		return controller.putTerm(term, score);
+		return Application.getTermController().putTerm(term, score);
 	}
 
 	@POST
@@ -48,7 +41,7 @@ public class Endpoint {
 	public Term putTermAsJson(Map<String, Object> termData) {
 		String term = (String) termData.get("term");
 		Double score = (Double) termData.get("score");
-		return controller.putTerm(term, score);
+		return Application.getTermController().putTerm(term, score);
 	}
 
 	@POST
@@ -66,10 +59,10 @@ public class Endpoint {
 
 		Map<String, Double> proportions = text.getProportions();
         for (String termString : proportions.keySet()) {
-            Term term = controller.getTerm(termString);
+            Term term = Application.getTermController().getTerm(termString);
             Double proportion = proportions.get(termString);
             if (term == null) {
-                term = controller.putTerm(termString, proportion);
+                term = Application.getTermController().putTerm(termString, proportion);
             } else {
                 term.update(proportion);
             }
