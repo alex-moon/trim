@@ -7,7 +7,7 @@ import java.util.Map;
 
 import com.github.alex_moon.trim.term.Term;
 
-public class Controller {
+public class Controller extends Thread {
     Map<Term, Map<Term, Correlation>> correlations;
     
     public List<Correlation> getCorrelations(Term term) {
