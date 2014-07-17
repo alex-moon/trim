@@ -5,13 +5,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.github.alex_moon.trim.correlation.persistence.Manager;
+import com.github.alex_moon.trim.correlation.persistence.Write;
 import com.github.alex_moon.trim.term.Term;
 
 public class Controller extends Thread {
     Map<Term, Map<Term, Correlation>> correlations;
+    Manager persistenceManager;
     
     public void run() {
         correlations = new HashMap<Term, Map<Term, Correlation>>();
+        persistenceManager = new Manager();
+        persistenceManager.start();
     }
     
     public List<Correlation> getCorrelations(Term term) {
@@ -47,6 +52,7 @@ public class Controller extends Thread {
             addCorrelation(correlation);
         }
         correlation.update();
-        // @todo dynamodb
+        Write write = new Write(correlation);
+        persistenceManager.push(write);
     }
 }
