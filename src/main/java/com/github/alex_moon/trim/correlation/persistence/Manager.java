@@ -4,16 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
-import com.amazonaws.regions.Region;
-import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.model.AttributeAction;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.dynamodbv2.model.AttributeValueUpdate;
 import com.amazonaws.services.dynamodbv2.model.ReturnValue;
 import com.amazonaws.services.dynamodbv2.model.UpdateItemRequest;
+import com.github.alex_moon.trim.Application;
 
 public class Manager extends Thread {
     private LinkedBlockingQueue<Write> writeQueue;
@@ -22,7 +19,7 @@ public class Manager extends Thread {
     
     public Manager() {
         writeQueue = new LinkedBlockingQueue<Write>();
-        client = getClient();
+        client = Application.getClient();
     }
     
     public void push(Write write) {
@@ -42,7 +39,6 @@ public class Manager extends Thread {
     }
     
     private void handleUpdate(Write write) {
-
         String a = write.getPrimaryTerm();
         String b = write.getSecondaryTerm();
         String value = write.getCoefficient().toString();
@@ -66,23 +62,5 @@ public class Manager extends Thread {
             .withAttributeUpdates(updates)
             .withReturnValues(ReturnValue.UPDATED_NEW);
         return updateItemRequest;
-    }
-    
-    public AmazonDynamoDBClient getClient() {
-        if (client == null) {
-            try {
-                // Dev uses profile credentials
-                AWSCredentials credentials = new ProfileCredentialsProvider().getCredentials();
-                client = new AmazonDynamoDBClient(credentials);
-            } catch (IllegalArgumentException e) {
-                // Live uses EC2 service role
-                client = new AmazonDynamoDBClient();
-            }
-
-            Region ireland = Region.getRegion(Regions.EU_WEST_1);
-            client.setRegion(ireland);
-        }
-
-        return client;
     }
 }

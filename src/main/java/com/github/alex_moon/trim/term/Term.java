@@ -25,7 +25,6 @@ public class Term {
 		mean = mean + (lastScore - mean) / count;
 		Double sumOfSquaredDifferences = (standardDeviation * standardDeviation) * (count - 1) + ((lastScore - lastMean) * (lastScore - mean));
 		standardDeviation = Math.sqrt(sumOfSquaredDifferences / count);
-		Application.getMapper().save(this);
 	}
 
 	public Double getMean() {

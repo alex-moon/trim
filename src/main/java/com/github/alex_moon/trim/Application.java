@@ -9,7 +9,6 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.github.alex_moon.trim.term.Term;
 
 public class Application {
-    private static DynamoDBMapper mapper;
     private static AmazonDynamoDBClient client;
     private static com.github.alex_moon.trim.term.Controller termController = getTermController();
     private static com.github.alex_moon.trim.text.Controller textController = getTextController();
@@ -31,14 +30,6 @@ public class Application {
         }
 
         return client;
-    }
-
-    public static DynamoDBMapper getMapper() {
-        if (mapper == null) {getTermController()
-            mapper = new DynamoDBMapper(getClient());
-        }
-
-        return mapper;
     }
     
     public static com.github.alex_moon.trim.term.Controller getTermController() {

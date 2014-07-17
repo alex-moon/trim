@@ -10,6 +10,10 @@ import com.github.alex_moon.trim.term.Term;
 public class Controller extends Thread {
     Map<Term, Map<Term, Correlation>> correlations;
     
+    public void run() {
+        correlations = new HashMap<Term, Map<Term, Correlation>>();
+    }
+    
     public List<Correlation> getCorrelations(Term term) {
         Map<Term, Correlation> correlationsMap = correlations.get(term);
         return new ArrayList<Correlation>(correlationsMap.values());
@@ -32,8 +36,10 @@ public class Controller extends Thread {
     }
     
     public void updateCorrelation(Term a, Term b) {
-        Correlation correlation = correlations.get(a).get(b);
-        if (correlation == null) {
+        Correlation correlation = null;
+        if (correlations.containsKey(a)) {
+            correlation = correlations.get(a).get(b);
+        } else if (correlations.containsKey(b)) {
             correlation = correlations.get(b).get(a);
         }
         if (correlation == null) {
