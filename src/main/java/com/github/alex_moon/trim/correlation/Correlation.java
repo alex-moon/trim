@@ -8,33 +8,33 @@ public class Correlation {
     private Term secondaryTerm;
     private Double coefficient;
     private Integer n = 0;
-    
+
     public Correlation(Term a, Term b, Double c) {
         primaryTerm = a;
         secondaryTerm = b;
         coefficient = c;
     }
-    
+
     public Term getPrimaryTerm() {
         return primaryTerm;
     }
-    
+
     public Term getSecondaryTerm() {
         return secondaryTerm;
     }
-    
+
     public Double getCoefficient() {
         return coefficient;
     }
-    
+
     public void update() {
-        n = n + 1;
+        n++;
         if (n > 2) {
             Double oldCoefficient = coefficient;
             Double oldCovariance = oldCoefficient * primaryTerm.getLastStandardDeviation() * secondaryTerm.getLastStandardDeviation();
             Double aDelta = primaryTerm.getLastScore() - primaryTerm.getLastMean();
             Double bDelta = secondaryTerm.getLastScore() - secondaryTerm.getLastMean();
-            Double newCovariance = oldCovariance + (n-1) * aDelta * bDelta / n;
+            Double newCovariance = oldCovariance + (n - 1) * aDelta * bDelta / n;
             coefficient = newCovariance / (primaryTerm.getStandardDeviation() * secondaryTerm.getStandardDeviation());
         } else {
             coefficient = 1.0;

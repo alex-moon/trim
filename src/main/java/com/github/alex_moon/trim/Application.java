@@ -31,7 +31,7 @@ public class Application {
 
         return client;
     }
-    
+
     public static com.github.alex_moon.trim.term.Controller getTermController() {
         if (termController == null) {
             termController = new com.github.alex_moon.trim.term.Controller();
@@ -39,7 +39,7 @@ public class Application {
         }
         return termController;
     }
-    
+
     public static com.github.alex_moon.trim.text.Controller getTextController() {
         if (textController == null) {
             textController = new com.github.alex_moon.trim.text.Controller();
@@ -47,7 +47,7 @@ public class Application {
         }
         return textController;
     }
-    
+
     public static com.github.alex_moon.trim.correlation.Controller getCorrelationController() {
         if (correlationController == null) {
             correlationController = new com.github.alex_moon.trim.correlation.Controller();

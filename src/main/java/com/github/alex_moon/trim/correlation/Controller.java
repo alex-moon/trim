@@ -12,18 +12,18 @@ import com.github.alex_moon.trim.term.Term;
 public class Controller extends Thread {
     Map<Term, Map<Term, Correlation>> correlations;
     Manager persistenceManager;
-    
+
     public void run() {
         correlations = new HashMap<Term, Map<Term, Correlation>>();
         persistenceManager = new Manager();
         persistenceManager.start();
     }
-    
+
     public List<Correlation> getCorrelations(Term term) {
         Map<Term, Correlation> correlationsMap = correlations.get(term);
         return new ArrayList<Correlation>(correlationsMap.values());
     }
-    
+
     public void addCorrelation(Correlation correlation) {
         Term a = correlation.getPrimaryTerm();
         Term b = correlation.getSecondaryTerm();
@@ -39,7 +39,7 @@ public class Controller extends Thread {
         correlationMap.put(b, correlation);
         correlations.put(a, correlationMap);
     }
-    
+
     public void updateCorrelation(Term a, Term b) {
         Correlation correlation = null;
         if (correlations.containsKey(a)) {
@@ -51,8 +51,30 @@ public class Controller extends Thread {
             correlation = new Correlation(a, b, 1.0);
             addCorrelation(correlation);
         }
+
         correlation.update();
-        Write write = new Write(correlation);
-        persistenceManager.push(write);
+
+        if (shouldStore(correlation.getCoefficient())) {
+            Write write = new Write(correlation);
+            persistenceManager.push(write);
+        }
+    }
+
+    private Boolean shouldStore(Double coefficient) {
+        // arbitrary range checker for demo purposes
+        // inside +-(0.5-0.9)
+        if (coefficient > 0.9) {
+            return false;
+        }
+        if (coefficient > 0 && coefficient < 0.5) {
+            return false;
+        }
+        if (coefficient < 0 && coefficient > -0.5) {
+            return false;
+        }
+        if (coefficient < -0.9) {
+            return false;
+        }
+        return true;
     }
 }

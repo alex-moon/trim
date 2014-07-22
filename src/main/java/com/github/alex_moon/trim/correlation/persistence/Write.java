@@ -9,26 +9,26 @@ public class Write {
     private String secondaryTerm;
     private Double coefficient;
     private Date timestamp;
-    
+
     public Write(Correlation correlation) {
         primaryTerm = correlation.getPrimaryTerm().getTerm();
         secondaryTerm = correlation.getSecondaryTerm().getTerm();
         coefficient = correlation.getCoefficient();
         timestamp = new Date();
     }
-    
+
     public String getPrimaryTerm() {
         return primaryTerm;
     }
-    
+
     public String getSecondaryTerm() {
         return secondaryTerm;
     }
-    
+
     public Double getCoefficient() {
         return coefficient;
     }
-    
+
     public Date getTimestamp() {
         return timestamp;
     }

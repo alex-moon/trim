@@ -57,9 +57,7 @@ public class Text {
         String[] terms = result.split(" ");
         List<String> significantTerms = new ArrayList<String>();
         for (int i = 0; i < terms.length; i++) {
-            if (! Controller.isStopWord(terms[i])
-             && ! "".equals(terms[i])
-             && ! (terms[i].length() < 3)) {
+            if (!Controller.isStopWord(terms[i]) && !"".equals(terms[i]) && !(terms[i].length() < 3)) {
                 significantTerms.add(terms[i]);
             }
         }
