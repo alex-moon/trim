@@ -1,10 +1,9 @@
 package com.github.alex_moon.trim.term;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
-import com.github.alex_moon.trim.Application;
 
+@DynamoDBTable(tableName="JawsSimple")
 public class Term {
     private String termString;
     private Double mean = 0.5;

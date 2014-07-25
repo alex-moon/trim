@@ -9,11 +9,19 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.github.alex_moon.trim.term.Term;
 
 public class Application {
+    private static DynamoDBMapper mapper;
     private static AmazonDynamoDBClient client;
     private static com.github.alex_moon.trim.term.Controller termController = getTermController();
     private static com.github.alex_moon.trim.text.Controller textController = getTextController();
     private static com.github.alex_moon.trim.correlation.Controller correlationController = getCorrelationController();
 
+    public static DynamoDBMapper getMapper() {
+        if (mapper == null) {
+            mapper = new DynamoDBMapper(getClient());
+        }
+        return mapper;
+    }
+    
     public static AmazonDynamoDBClient getClient() {
         if (client == null) {
             try {

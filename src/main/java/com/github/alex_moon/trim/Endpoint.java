@@ -1,6 +1,9 @@
 package com.github.alex_moon.trim;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -10,7 +13,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.github.alex_moon.trim.term.Controller;
+import com.github.alex_moon.trim.correlation.Correlation;
 import com.github.alex_moon.trim.term.Term;
 import com.github.alex_moon.trim.text.Text;
 import com.sun.jersey.spi.resource.Singleton;
