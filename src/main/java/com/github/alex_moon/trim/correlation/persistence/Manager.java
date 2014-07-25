@@ -28,7 +28,7 @@ public class Manager extends Thread {
             try {
                 Write write = writeQueue.take();
                 handleUpdate(write);
-                sleep(1000);
+                sleep(500);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }

@@ -61,6 +61,9 @@ public class Controller extends Thread {
     }
 
     private Boolean shouldStore(Double coefficient) {
+        if (coefficient.isNaN()) {
+            return false;
+        }
         // arbitrary range checker for demo purposes
         // inside +-(0.5-0.9)
         if (coefficient > 0.9) {

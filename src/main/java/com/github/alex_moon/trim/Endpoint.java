@@ -1,9 +1,6 @@
 package com.github.alex_moon.trim;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -13,7 +10,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.github.alex_moon.trim.correlation.Correlation;
 import com.github.alex_moon.trim.term.Term;
 import com.github.alex_moon.trim.text.Text;
 import com.sun.jersey.spi.resource.Singleton;
@@ -72,17 +68,12 @@ public class Endpoint {
         }
 
         for (String termString : proportions.keySet()) {
-            Boolean doCorrelation = false;
             for (String coString : proportions.keySet()) {
                 if (!coString.equals(termString)) {
-                    if (!doCorrelation) {
-                        continue;
-                    }
                     Term term = Application.getTermController().getTerm(termString);
                     Term coTerm = Application.getTermController().getTerm(coString);
                     Application.getCorrelationController().updateCorrelation(term, coTerm);
                 }
-                doCorrelation = true;
             }
         }
 
