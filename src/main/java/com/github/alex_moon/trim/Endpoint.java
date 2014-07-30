@@ -8,6 +8,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
 import com.github.alex_moon.trim.term.Term;
@@ -23,7 +24,11 @@ public class Endpoint {
     @Path("term/{term}")
     @Produces(MediaType.APPLICATION_JSON)
     public Term getTerm(@PathParam("term") String term) {
-        return Application.getTermController().getTerm(term);
+        Term result = Application.getTermController().getTerm(term);
+        if (result == null) {
+            throw new WebApplicationException(404);
+        }
+        return result;
     }
 
     @POST

@@ -13,7 +13,7 @@ import com.github.alex_moon.trim.Application;
 
 public class Manager extends Thread {
     private LinkedBlockingQueue<Write> writeQueue;
-    private final String tableName = "Jaws";
+    private final String tableName = System.getProperty("jaws.tablename", "Jaws");
 
     public Manager() {
         writeQueue = new LinkedBlockingQueue<Write>();
